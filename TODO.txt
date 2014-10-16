@@ -1,0 +1,2 @@
+
+Examine files in /SimpleSQLNoGradle/SimpleSQL/src/edu/gatech/coc/cs6422/group16/algebraTree
