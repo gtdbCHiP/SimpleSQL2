@@ -35,6 +35,12 @@ public class ProjectNode extends RelationalAlgebraTree
     {
         return childrenCost.get(0);
     }
+    
+    @Override 
+    public double evaluateSize(List<RelationalAlgebraTree> children)
+    {
+    	return children.get(0).getEstimatedSize();
+    }
 
     @Override
     public String getNodeContent()
@@ -63,7 +69,7 @@ public class ProjectNode extends RelationalAlgebraTree
         ExecutionConfig config = ExecutionConfig.getInstance();
         if (config.isShowCostsInVisualTree())
         {
-            s += "\n" + this.computeCost();
+            s += "\n" + this.computeCost() + "\nEstimated Size:" + this.getEstimatedSize();
         }
         return s;
     }

@@ -27,6 +27,12 @@ public class QualifiedField extends RelationalAlgebraTree
     {
         return 0;
     }
+    
+    @Override 
+    public double evaluateSize(List<RelationalAlgebraTree> children)
+    {
+        return 0.0;
+    }
 
     @Override
     public String getNodeContent()

@@ -26,6 +26,13 @@ public class RelationNode extends RelationalAlgebraTree
         MetaDataRepository meta = MetaDataRepository.GetInstance();
         return meta.GetRelationSize(this.relation);
     }
+    
+    @Override 
+    public double evaluateSize(List<RelationalAlgebraTree> children)
+    {
+    	MetaDataRepository meta = MetaDataRepository.GetInstance();
+        return meta.GetRelationSize(this.relation);
+    }
 
     @Override
     public String getNodeContent()
@@ -33,7 +40,7 @@ public class RelationNode extends RelationalAlgebraTree
         ExecutionConfig config = ExecutionConfig.getInstance();
         if (config.isShowCostsInVisualTree())
         {
-            return this.getRelation() + "\n" + this.computeCost();
+            return this.getRelation() + "\n" + this.computeCost() + "\nEstimated Size:" + this.getEstimatedSize();
         }
         else
         {

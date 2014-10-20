@@ -3,6 +3,8 @@ package edu.gatech.coc.cs6422.group16.algebraTree;
 import edu.gatech.coc.cs6422.group16.executionConfiguration.ExecutionConfig;
 import edu.gatech.coc.cs6422.group16.metaDataRepository.MetaDataRepository;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class JoinNode extends RelationalAlgebraTree
@@ -34,7 +36,16 @@ public class JoinNode extends RelationalAlgebraTree
         MetaDataRepository meta = MetaDataRepository.GetInstance();
         // formula: T(R) = (T(S1) * T(S2)) / max(V(R1, a), V(R2, a))
         return (childrenCost.get(0) * childrenCost.get(1)) / Math.max(meta.GetDistinctValueOfAttribute(this.condition1),
-                meta.GetDistinctValueOfAttribute(this.condition2));
+                meta.GetDistinctValueOfAttribute(this.condition2)) ;
+    }
+    
+    @Override 
+    public double evaluateSize(List<RelationalAlgebraTree> children)
+    {
+    	 MetaDataRepository meta = MetaDataRepository.GetInstance();
+         // formula: T(R) = (T(S1) * T(S2)) / max(V(R1, a), V(R2, a))
+         return (children.get(0).getEstimatedSize() * children.get(1).getEstimatedSize()) / Math.max(meta.GetDistinctValueOfAttribute(this.condition1),
+                 meta.GetDistinctValueOfAttribute(this.condition2)) ;
     }
 
     @Override
@@ -43,7 +54,7 @@ public class JoinNode extends RelationalAlgebraTree
         ExecutionConfig config = ExecutionConfig.getInstance();
         if (config.isShowCostsInVisualTree())
         {
-            return "Join(" + condition1.toString() + " = " + condition2.toString() + ")\n" + this.computeCost();
+            return "Join(" + condition1.toString() + " = " + condition2.toString() + ")\n" + this.computeCost()+ "\nEstimated Size:" + this.getEstimatedSize();
         }
         else
         {
@@ -111,5 +122,19 @@ public class JoinNode extends RelationalAlgebraTree
     public JoinAsSelectNode toJoinAsSelectNode()
     {
         return new JoinAsSelectNode(condition1, comparison, condition2);
+    }
+    
+    public void reorderChildrenBasedOnCost()
+    {
+    	
+    	//Sorting
+    	Collections.sort(getChildren(), new Comparator<RelationalAlgebraTree>() {
+    	        @Override
+    	        public int compare(RelationalAlgebraTree childA, RelationalAlgebraTree childB)
+    	        {
+    	        	System.out.println("Comparing " + childA.getEstimatedSize() +" and " + childB.getEstimatedSize() + "\n");
+    	        	return Double.compare(childA.getEstimatedSize(), childB.getEstimatedSize());
+    	        }
+    	    });
     }
 }

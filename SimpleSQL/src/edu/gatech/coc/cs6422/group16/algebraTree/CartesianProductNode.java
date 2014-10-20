@@ -17,6 +17,12 @@ public class CartesianProductNode extends RelationalAlgebraTree
     {
         return childrenCost.get(0) * childrenCost.get(1);
     }
+    
+    @Override 
+    public double evaluateSize(List<RelationalAlgebraTree> children)
+    {
+    	return children.get(0).getEstimatedSize() * children.get(1).getEstimatedSize();
+    }
 
     @Override
     public String getNodeContent()
@@ -24,7 +30,7 @@ public class CartesianProductNode extends RelationalAlgebraTree
         ExecutionConfig config = ExecutionConfig.getInstance();
         if (config.isShowCostsInVisualTree())
         {
-            return "x \n " + this.computeCost();
+            return "x \n " + this.computeCost() + "\nEstimated Size:" + this.getEstimatedSize();
         }
         else
         {

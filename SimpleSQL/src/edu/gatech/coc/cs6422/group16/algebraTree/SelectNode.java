@@ -34,6 +34,13 @@ public class SelectNode extends RelationalAlgebraTree
         // formula: T(R) = T(S) / V(S, a)
         return childrenCost.get(0) / (double) meta.GetDistinctValueOfAttribute(this.field);
     }
+    
+    @Override 
+    public double evaluateSize(List<RelationalAlgebraTree> children)
+    {
+    	MetaDataRepository meta = MetaDataRepository.GetInstance();
+    	return children.get(0).getEstimatedSize() / (double) meta.GetDistinctValueOfAttribute(this.field);
+    }
 
     @Override
     public String getNodeContent()
@@ -42,7 +49,7 @@ public class SelectNode extends RelationalAlgebraTree
         if (config.isShowCostsInVisualTree())
         {
             return "\u03c3(" + this.field.toString() + " " + this.comparison.toString() + " " + this.value + ")\n" +
-                    this.computeCost();
+                    this.computeCost() + "\nEstimated Size:" + this.getEstimatedSize();
         }
         else
         {

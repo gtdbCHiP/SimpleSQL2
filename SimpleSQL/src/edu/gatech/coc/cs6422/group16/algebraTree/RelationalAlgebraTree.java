@@ -35,6 +35,9 @@ public abstract class RelationalAlgebraTree
 
     private RelationalAlgebraTree parent = null;
 
+    private double estimatedSize = 0;
+
+
     public abstract RelationalAlgebraTree copyNode();
 
     public abstract double evaluateCost(List<Double> childrenCost);
@@ -43,6 +46,8 @@ public abstract class RelationalAlgebraTree
 
     public abstract boolean validate(List<RelationNode> relationNodes);
 
+    public abstract double evaluateSize(List<RelationalAlgebraTree> children);
+    
     public void addChild(RelationalAlgebraTree node)
     {
         children.add(node);
@@ -63,6 +68,11 @@ public abstract class RelationalAlgebraTree
             childCost += c;
         }
         return ownCost + childCost;
+    }
+    
+    public void computeSize()
+    {
+    	setEstimatedSize(evaluateSize(this.children));
     }
 
     public RelationalAlgebraTree copyFields(RelationalAlgebraTree other)
@@ -192,5 +202,13 @@ public abstract class RelationalAlgebraTree
         }
         return this.validate(relationNodes) && valid;
     }
+
+	public double getEstimatedSize() {
+		return estimatedSize;
+	}
+
+	public void setEstimatedSize(double estimatedSize) {
+		this.estimatedSize = estimatedSize;
+	}
 }
 

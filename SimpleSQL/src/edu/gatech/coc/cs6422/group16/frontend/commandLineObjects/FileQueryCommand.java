@@ -27,6 +27,8 @@ public class FileQueryCommand extends ProcessQueryCommand
     @Override
     protected List<RelationalAlgebraTree> parseTree() throws IOException
     {
-        return QueryParser.parseFile(filteredFileName);
+    	List<RelationalAlgebraTree> abc = QueryParser.parseFile(filteredFileName);
+    	return abc;
+    	//return QueryParser.parseFile(filteredFileName);
     }
 }
