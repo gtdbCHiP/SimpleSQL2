@@ -1,0 +1,7 @@
+Student (ID, Name, Age, GraduationYear)  [9748 records]
+
+Course (ID, CourseName, Department, ProfessorID)  [1200 records]
+
+Professor (ID, Name, Department, Age)  [1066 records]
+
+Grade(CourseID, StudentID, Grade)  [45295 records]
