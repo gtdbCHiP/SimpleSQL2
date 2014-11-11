@@ -7,15 +7,23 @@ public class PushSelectionDown
     public static boolean TraverseCartesianProductNode(final SelectNode selNode, RelationalAlgebraTree root)
     {
         boolean change = false;
+        if (root == null)
+        	return change;
         CartesianProductNode carProdNode = root.getCurrentNodeAs(CartesianProductNode.class);
-        if (carProdNode == null)
+        SelectNode selNodeB = root.getCurrentNodeAs(SelectNode.class);
+        ProjectNode projNode = root.getCurrentNodeAs(ProjectNode.class);
+        if (carProdNode == null && selNodeB ==null && projNode == null)
         {
             return change;
         }
-        RelationalAlgebraTree c1 = carProdNode.getChildren().get(0);
-        RelationalAlgebraTree c2 = carProdNode.getChildren().get(1);
+        RelationalAlgebraTree c1 = root.getChildren().get(0);
+        RelationalAlgebraTree c2 = null;
+        if (root.getChildCount() > 1)
+        	c2 = root.getChildren().get(1);
+        
         //currently ignore multiple selection on a single relation
         RelationNode relNode;
+ 
         if (c1 != null)
         {
             if ((relNode = c1.getCurrentNodeAs(RelationNode.class)) != null)
@@ -25,7 +33,7 @@ public class PushSelectionDown
                 {
                     SelectNode newSelNode = new SelectNode(selNode.getField(), selNode.getComparison(),
                             selNode.getValue());
-                    carProdNode.insertNodeInSubtree(0, newSelNode);
+                    root.insertNodeInSubtree(0, newSelNode);
                     change = true;
                 }
             }
