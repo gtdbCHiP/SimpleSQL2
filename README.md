@@ -1,4 +1,4 @@
-SimpleSQL2 Query Optimizer (aka SimpleSQLNoGradle) 
+SimpleSQL2 Query Optimizer (originally called SimpleSQLNoGradle) 
 =================
 Improvements on the SimpleSQL project developed by fellow Georgia Tech Students for CS 6422. 
 
@@ -13,6 +13,8 @@ In our project, we have developed three new heuristics to overcome the limitatio
 - Reordering relations based on relation size for joins
 - Pushing all selections down to relations
 - Reordering nodes based on intermediate results for join
+
+In addition, we have implemented SimpleSQL2 as a Java project that contains all required libraries and source files (not dependent on any tool/IDE).
 
 
 Future Work / Wish List 
