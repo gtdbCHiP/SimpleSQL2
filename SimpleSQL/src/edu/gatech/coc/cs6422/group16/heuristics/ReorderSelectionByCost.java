@@ -13,16 +13,16 @@ public class ReorderSelectionByCost
     	// Get left child
     	RelationalAlgebraTree c1 = root.getChildren().get(0);
 
-      	// If this is a select node with a select node child 
       	SelectNode rootSel = root.getCurrentNodeAs(SelectNode.class);
       	SelectNode childSel = c1.getCurrentNodeAs(SelectNode.class);
+      	// If this is a select node with a select node child swap if one selectivity factor is better
       	if (rootSel != null)
         	if (childSel != null) {
         		MetaDataRepository meta = MetaDataRepository.GetInstance();
         	    double rootSelFactor = meta.GetDistinctValueOfAttribute(rootSel.getField());
         	    double childSelFactor = meta.GetDistinctValueOfAttribute(childSel.getField());
         	    
-        		if (rootSelFactor < childSelFactor) {
+        		if (rootSelFactor > childSelFactor) {
 	
 	                // get nodes above and below
 	                RelationalAlgebraTree parent = root.getParent();
