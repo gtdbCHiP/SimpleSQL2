@@ -2,7 +2,7 @@ SimpleSQL2 Query Optimizer (aka SimpleSQLNoGradle)
 =================
 Improvements on the SimpleSQL project developed by fellow Georgia Tech Students for CS 6422. 
 
-This software is developed for CS6422 Fall 2014.
+This software is developed for CS6422 Fall 2014. 
 
 
 Overview 
@@ -15,19 +15,28 @@ In our project, we have developed three new heuristics to overcome the limitatio
 - Reordering nodes based on intermediate results for join
 
 
+Future Work / Wish List 
+=================
+SimpleSQL2 has definitely room for futher improvement. We have identified the following areas below that have the potential for future work: 
+- Ability to support indexes on the data, and for the program to make use of index information to select the best implementation strategy for the operators 
+- Identifying selectivity factors for range comparisons, or for data with similar values (e.g. first name = "George")
+- Selecting the best algorithm for evaluating relational algebra operators (based on attributes affected, availability of index, and data layout on disk)
+- Understanding the context of which the original developers calculated their estimated size, and how they intended to use it
+- Allowing users to specify how the data is stored on disk so as to calculate disk access time 
+- Mapping database files to backend data and measuring how fast the best case and worst case query will take (can be used to compare effectiveness of optimizations)
 
 
-How we made SimpleSQL2 independent from any IDE or build automation tool
+How we made SimpleSQL2 independent from IDE or build automation tool
 =================
 - Create new Java Eclipse Project 
 - Import src code 
 - Download required libraries (already included in /lib of project folder) 
 - Add jar libraries to build path 
 - Generate SimpleSQL Parser and Lexer files from SimpleSQL.q4 from antrl folder (in original branch) 
--- Go to http://www.antlr.org/ and download full version 
--- Open Command Line 
--- Execute SET CLASSPATH=.;C:\Users\Luppy\Desktop\antlr-4.4-complete.jar;%CLASSPATH%
--- Execute java org.antlr.v4.Tool SimpleSQL.g4
+- Go to http://www.antlr.org/ and download full version 
+- Open Command Line 
+- Execute SET CLASSPATH=.;C:\Users\User\Desktop\antlr-4.4-complete.jar;%CLASSPATH%
+- Execute java org.antlr.v4.Tool SimpleSQL.g4
 - Copy the generated files into the SimpleSQL src code package in Eclipse 
 - Build and compile the Eclipse project 
 
