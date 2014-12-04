@@ -19,17 +19,17 @@ In our project, we have developed three new heuristics to overcome the limitatio
 
 How we made SimpleSQL2 independent from any IDE or build automation tool
 =================
-1 Create new Java Eclipse Project 
-2 Import src code 
-3 Download required libraries (already included in /lib of project folder) 
-4 Add jar libraries to build path 
-5 Generate SimpleSQL Parser and Lexer files from SimpleSQL.q4 from antrl folder (in original branch) 
-5.1 Go to http://www.antlr.org/ and download full version 
-5.2 Open Command Line 
-5.3 Execute SET CLASSPATH=.;C:\Users\Luppy\Desktop\antlr-4.4-complete.jar;%CLASSPATH%
-5.4 Execute java org.antlr.v4.Tool SimpleSQL.g4
-6 Copy the generated files into the SimpleSQL src code package in Eclipse 
-7 Build and compile the Eclipse project 
+- Create new Java Eclipse Project 
+- Import src code 
+- Download required libraries (already included in /lib of project folder) 
+- Add jar libraries to build path 
+- Generate SimpleSQL Parser and Lexer files from SimpleSQL.q4 from antrl folder (in original branch) 
+-- Go to http://www.antlr.org/ and download full version 
+-- Open Command Line 
+-- Execute SET CLASSPATH=.;C:\Users\Luppy\Desktop\antlr-4.4-complete.jar;%CLASSPATH%
+-- Execute java org.antlr.v4.Tool SimpleSQL.g4
+- Copy the generated files into the SimpleSQL src code package in Eclipse 
+- Build and compile the Eclipse project 
 
 
 Websites for libraries 
